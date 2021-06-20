@@ -17,15 +17,14 @@ void setup() {
 unsigned long start;
 void loop() {
     if (scale.is_ready()) {
-        auto value = static_cast<long>(scale.read());
+        auto value = scale.read();
 
         unsigned long end = millis();
         unsigned long elapsed = end - start;
         start = millis();
 
-
-        Serial.print(value);
-        Serial.print(" ");
-        Serial.println(elapsed);
+        Serial.println(value);
+        // Serial.print(" ");
+        // Serial.println(elapsed);
     }
 }
