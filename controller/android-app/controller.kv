@@ -1,0 +1,32 @@
+#:kivy 2.0.0
+
+<MySlider@Slider>:
+    min: 1
+    max: 500
+    step: 1
+    value: 250
+
+<Controller>:
+    delay_input: delay_input
+    width_input: width_input
+
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 20
+
+        Button:
+            text: 'Vibrate'
+            on_release: root.vibrate()
+
+        Button:
+            text: 'Cancel'
+            on_release: root.cancel()
+
+        MySlider:
+            id: width_input
+            on_touch_up: root.vibrate()
+
+        MySlider:
+            id: delay_input
+            on_touch_up: root.vibrate()
+

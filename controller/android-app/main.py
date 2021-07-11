@@ -5,16 +5,37 @@
 
 import kivy
 
+from kivy.app import App
+from kivy.properties import ObjectProperty
+from kivy.uix.boxlayout import BoxLayout
+
+from plyer import vibrator
+
 kivy.require("2.0.0")
 
-from kivy.app import App  # noqa
-from kivy.uix.label import Label  # noqa
+
+class Controller(BoxLayout):
+    width_input = ObjectProperty(None)
+    delay_input = ObjectProperty(None)
+
+    def vibrate(self):
+        self.cancel()
+
+        pattern = [0, self.width_input.value / 1000,
+                   self.delay_input.value / 1000]
+        vibrator.pattern(pattern, repeat=1)
+        print(pattern)
+
+    def cancel(self):
+        vibrator.cancel()
 
 
-class MyApp(App):
+class ControllerApp(App):
     def build(self):
-        return Label(text="Hello world")
+        return Controller()
 
 
 if __name__ == "__main__":
-    MyApp().run()
+    # vibrator.([0, 0.1, 0.1])
+
+    ControllerApp().run()
